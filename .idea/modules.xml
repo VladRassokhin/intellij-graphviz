@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-graphviz.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-graphviz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-graphviz_main.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-graphviz_main.iml" group="intellij-graphviz" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-graphviz_test.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-graphviz_test.iml" group="intellij-graphviz" />
+    </modules>
+  </component>
+</project>
