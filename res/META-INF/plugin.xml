@@ -1,0 +1,42 @@
+<idea-plugin version="2">
+  <id>org.intellij.plugins.graphviz</id>
+  <name>Graphviz language support</name>
+  <version>0.1.0.dev</version>
+  <vendor email="vlad.rassokhin+intellij+graphviz@gmail.com" url="https://github.com/VladRassokhin">Vladislav Rassokhin</vendor>
+
+  <description><![CDATA[
+    <!-- TODO!!! -->
+    ]]></description>
+
+  <change-notes><![CDATA[
+    <h4>0.1.0 (UNRELEASED)</h4>
+    <p>Basic language support</p>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="141.3000"/>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="org.intellij.plugins.graphviz.GraphvizFileTypeFactory"/>
+    <lang.parserDefinition language="Graphviz" implementationClass="org.intellij.plugins.graphviz.GraphvizParserDefinition"/>
+
+    <lang.syntaxHighlighterFactory key="Graphviz" implementationClass="org.intellij.plugins.graphviz.GraphvizSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="org.intellij.plugins.graphviz.GraphvizColorsPage"/>
+  </extensions>
+
+  <application-components>
+  </application-components>
+
+  <project-components>
+  </project-components>
+
+  <actions>
+  </actions>
+
+</idea-plugin>
