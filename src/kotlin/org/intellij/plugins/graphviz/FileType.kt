@@ -20,13 +20,13 @@ import com.intellij.openapi.fileTypes.FileTypeFactory
 import com.intellij.openapi.fileTypes.LanguageFileType
 
 object GraphvizFileType : LanguageFileType(GraphvizLanguage) {
-  val DEFAULT_EXTENSION: String = "tick"
+  val DEFAULT_EXTENSION: String = "gv"
 
   override fun getIcon() = Icons.FileTypes.Graphviz
 
   override fun getDefaultExtension() = DEFAULT_EXTENSION
 
-  override fun getDescription() = "Graphviz TICKscript" // TODO: Better one
+  override fun getDescription() = "Graphviz .dot graph" // TODO: Better one
 
   override fun getName() = "Graphviz"
 
@@ -35,5 +35,6 @@ object GraphvizFileType : LanguageFileType(GraphvizLanguage) {
 class GraphvizFileTypeFactory : FileTypeFactory() {
   override fun createFileTypes(consumer: FileTypeConsumer) {
     consumer.consume(GraphvizFileType, GraphvizFileType.DEFAULT_EXTENSION)
+    consumer.consume(GraphvizFileType, "dot")
   }
 }
