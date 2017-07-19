@@ -31,6 +31,10 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitGraph(@NotNull GraphvizGraph o) {
+    visitPsiElement(o);
+  }
+
   public void visitHtmlLiteral(@NotNull GraphvizHtmlLiteral o) {
     visitPsiElement(o);
   }

@@ -27,9 +27,9 @@ WHITE_SPACE=\s+
 
 LINE_COMMENT=("//".*)|(#.*)
 BLOCK_COMMENT="/"\*([^*]|\*[^/])*\*?(\*"/")?
-ID=[_a-zA-Z\u0080-\uFFFC\U0000FFFE-\U0010FFFF][0-9_a-zA-Z\u0080-\uFFFC\U0000FFFE-\U0010FFFF]*
+ID=[_[:letter:]][0-9_[:letter:]]*
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"
-NUMBER=-?([0-9]+(\.[0-9]*)?)|(\.[0-9]+)
+NUMBER=-?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))
 HTML_STRING=<([^<>]+|<[^<>]+>)*>
 
 %%
@@ -47,6 +47,8 @@ HTML_STRING=<([^<>]+|<[^<>]+>)*>
   ":"                         { return COLON; }
   ";"                         { return SEMICOLON; }
   "_"                         { return UNDERSCORE; }
+  "->"                        { return EDGE_DIR; }
+  "--"                        { return EDGE_UNDIR; }
   "strict"                    { return KW_STRICT; }
   "graph"                     { return KW_GRAPH; }
   "digraph"                   { return KW_DIGRAPH; }

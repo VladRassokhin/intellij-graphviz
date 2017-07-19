@@ -14,6 +14,7 @@ public interface GraphvizElementTypes {
   IElementType COMPASS_PT = new GraphvizElementType("COMPASS_PT");
   IElementType EDGE_OP = new GraphvizElementType("EDGE_OP");
   IElementType EDGE_STMT = new GraphvizElementType("EDGE_STMT");
+  IElementType GRAPH = new GraphvizElementType("GRAPH");
   IElementType HTML_LITERAL = new GraphvizElementType("HTML_LITERAL");
   IElementType IDENTIFIER = new GraphvizElementType("IDENTIFIER");
   IElementType ID_LITERAL = new GraphvizElementType("ID_LITERAL");
@@ -31,6 +32,8 @@ public interface GraphvizElementTypes {
   IElementType COLON = new GraphvizTokenType(":");
   IElementType COMMA = new GraphvizTokenType(",");
   IElementType DOUBLE_QUOTED_STRING = new GraphvizTokenType("DOUBLE_QUOTED_STRING");
+  IElementType EDGE_DIR = new GraphvizTokenType("->");
+  IElementType EDGE_UNDIR = new GraphvizTokenType("--");
   IElementType HTML_STRING = new GraphvizTokenType("HTML_STRING");
   IElementType ID = new GraphvizTokenType("ID");
   IElementType KW_C = new GraphvizTokenType("C");
@@ -79,6 +82,9 @@ public interface GraphvizElementTypes {
       }
       else if (type == EDGE_STMT) {
         return new GraphvizEdgeStmtImpl(node);
+      }
+      else if (type == GRAPH) {
+        return new GraphvizGraphImpl(node);
       }
       else if (type == HTML_LITERAL) {
         return new GraphvizHtmlLiteralImpl(node);

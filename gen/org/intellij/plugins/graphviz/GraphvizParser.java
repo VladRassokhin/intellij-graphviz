@@ -41,6 +41,9 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
     else if (t == EDGE_STMT) {
       r = edge_stmt(b, 0);
     }
+    else if (t == GRAPH) {
+      r = graph(b, 0);
+    }
     else if (t == HTML_LITERAL) {
       r = html_literal(b, 0);
     }
@@ -81,7 +84,7 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   }
 
   protected boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-    return graph(b, l + 1);
+    return root(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -105,13 +108,14 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   // '[' attr_list_element* ']'
   private static boolean attr_list_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attr_list_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, L_BRACKET);
-    r = r && attr_list_0_1(b, l + 1);
-    r = r && consumeToken(b, R_BRACKET);
-    exit_section_(b, m, null, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, attr_list_0_1(b, l + 1));
+    r = p && consumeToken(b, R_BRACKET) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // attr_list_element*
@@ -127,35 +131,62 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier '=' identifier ( ';' | ',' )?
+  // identifier ('=' identifier)? ( ';' | ',' )? {
+  // //  pin=2
+  // }
   public static boolean attr_list_element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attr_list_element")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ATTR_LIST_ELEMENT, "<attr list element>");
     r = identifier(b, l + 1);
-    r = r && consumeToken(b, ASGN);
-    r = r && identifier(b, l + 1);
+    r = r && attr_list_element_1(b, l + 1);
+    r = r && attr_list_element_2(b, l + 1);
     r = r && attr_list_element_3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // ('=' identifier)?
+  private static boolean attr_list_element_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attr_list_element_1")) return false;
+    attr_list_element_1_0(b, l + 1);
+    return true;
+  }
+
+  // '=' identifier
+  private static boolean attr_list_element_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attr_list_element_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ASGN);
+    r = r && identifier(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // ( ';' | ',' )?
-  private static boolean attr_list_element_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "attr_list_element_3")) return false;
-    attr_list_element_3_0(b, l + 1);
+  private static boolean attr_list_element_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attr_list_element_2")) return false;
+    attr_list_element_2_0(b, l + 1);
     return true;
   }
 
   // ';' | ','
-  private static boolean attr_list_element_3_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "attr_list_element_3_0")) return false;
+  private static boolean attr_list_element_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attr_list_element_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, SEMICOLON);
     if (!r) r = consumeToken(b, COMMA);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // {
+  // //  pin=2
+  // }
+  private static boolean attr_list_element_3(PsiBuilder b, int l) {
+    return true;
   }
 
   /* ********************************************************** */
@@ -203,64 +234,26 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (edge_op (node_id | subgraph))+
-  static boolean edgeRHS(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "edgeRHS")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = edgeRHS_0(b, l + 1);
-    int c = current_position_(b);
-    while (r) {
-      if (!edgeRHS_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "edgeRHS", c)) break;
-      c = current_position_(b);
-    }
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // edge_op (node_id | subgraph)
-  private static boolean edgeRHS_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "edgeRHS_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = edge_op(b, l + 1);
-    r = r && edgeRHS_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // node_id | subgraph
-  private static boolean edgeRHS_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "edgeRHS_0_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = node_id(b, l + 1);
-    if (!r) r = subgraph(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // '->' | '--'
   public static boolean edge_op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "edge_op")) return false;
+    if (!nextTokenIs(b, "<edge op>", EDGE_UNDIR, EDGE_DIR)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EDGE_OP, "<edge op>");
-    r = consumeToken(b, "->");
-    if (!r) r = consumeToken(b, "--");
+    r = consumeToken(b, EDGE_DIR);
+    if (!r) r = consumeToken(b, EDGE_UNDIR);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // (node_id | subgraph) edgeRHS attr_list?
+  // (node_id | subgraph) (edge_op (node_id | subgraph))+ attr_list?
   public static boolean edge_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "edge_stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EDGE_STMT, "<edge stmt>");
     r = edge_stmt_0(b, l + 1);
-    r = r && edgeRHS(b, l + 1);
+    r = r && edge_stmt_1(b, l + 1);
     r = r && edge_stmt_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -269,6 +262,44 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   // node_id | subgraph
   private static boolean edge_stmt_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "edge_stmt_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = node_id(b, l + 1);
+    if (!r) r = subgraph(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (edge_op (node_id | subgraph))+
+  private static boolean edge_stmt_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "edge_stmt_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = edge_stmt_1_0(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!edge_stmt_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "edge_stmt_1", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // edge_op (node_id | subgraph)
+  private static boolean edge_stmt_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "edge_stmt_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = edge_op(b, l + 1);
+    r = r && edge_stmt_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // node_id | subgraph
+  private static boolean edge_stmt_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "edge_stmt_1_0_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = node_id(b, l + 1);
@@ -286,15 +317,15 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list
-  static boolean graph(PsiBuilder b, int l) {
+  public static boolean graph(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "graph")) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, GRAPH, "<graph>");
     r = graph_0(b, l + 1);
     r = r && graph_1(b, l + 1);
     r = r && graph_2(b, l + 1);
     r = r && stmt_list(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -467,8 +498,16 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // node_stmt
-  //        | edge_stmt
+  // graph?
+  static boolean root(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root")) return false;
+    graph(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // edge_stmt
+  //        | node_stmt
   //        | attr_stmt
   //        | identifier '=' identifier
   //        | subgraph
@@ -476,8 +515,8 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
-    r = node_stmt(b, l + 1);
-    if (!r) r = edge_stmt(b, l + 1);
+    r = edge_stmt(b, l + 1);
+    if (!r) r = node_stmt(b, l + 1);
     if (!r) r = attr_stmt(b, l + 1);
     if (!r) r = stmt_3(b, l + 1);
     if (!r) r = subgraph(b, l + 1);
@@ -502,13 +541,14 @@ public class GraphvizParser implements PsiParser, LightPsiParser {
   public static boolean stmt_list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt_list")) return false;
     if (!nextTokenIs(b, L_CURLY)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, STMT_LIST, null);
     r = consumeToken(b, L_CURLY);
-    r = r && stmt_list_1(b, l + 1);
-    r = r && consumeToken(b, R_CURLY);
-    exit_section_(b, m, STMT_LIST, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, stmt_list_1(b, l + 1));
+    r = p && consumeToken(b, R_CURLY) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // (stmt ';'?)*

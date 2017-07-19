@@ -46,6 +46,9 @@
     SEMICOLON=';'
     UNDERSCORE='_'
 
+    EDGE_DIR='->'
+    EDGE_UNDIR='--'
+
     // Keywords TODO: make them case-insensitive
     KW_STRICT='strict'
     KW_GRAPH='graph'
@@ -64,35 +67,39 @@
 
 
     // Other elements
-    ID="regexp:[_a-zA-Z\u0080-\uFFFC\U0000FFFE-\U0010FFFF][0-9_a-zA-Z\u0080-\uFFFC\U0000FFFE-\U0010FFFF]*"
+    // TODO: Return support for Unicode
+    ID="regexp:[_[:letter:]][0-9_[:letter:]]*"
     // TODO: Add tailing '?' to string
     DOUBLE_QUOTED_STRING="regexp:\"([^\\\"\r\n]|\\[^\r\n])*\""
-    NUMBER='regexp:-?(\d+(\.\d*)?)|(\.\d+)'
+    NUMBER='regexp:-?((\d+(\.\d*)?)|(\.\d+))'
     HTML_STRING='regexp:<([^<>]+|<[^<>]+>)*>'
 
   ]
 
 }
 
+root ::= graph?
 graph    ::= KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list
 subgraph ::= ( KW_SUBGRAPH identifier? )? stmt_list
 
-stmt_list ::=  '{' (stmt ';'?)* '}'
-attr_list ::= ('[' attr_list_element* ']')+
-attr_list_element ::= identifier '=' identifier ( ';' | ',' )?
+stmt_list ::=  '{' (stmt ';'?)* '}' {
+  pin=1
+}
+attr_list ::= ('[' attr_list_element* ']')+ {
+  pin('.*')=1
+}
+attr_list_element ::= identifier ('=' identifier)? ( ';' | ',' )?
 
-stmt ::= node_stmt
-       | edge_stmt
+stmt ::= edge_stmt
+       | node_stmt
        | attr_stmt
        | identifier '=' identifier
        | subgraph
 
 node_stmt ::= node_id attr_list?
 attr_stmt ::= (KW_GRAPH | KW_NODE | KW_EDGE) attr_list
-edge_stmt ::= (node_id | subgraph) edgeRHS attr_list?
+edge_stmt ::= (node_id | subgraph) (edge_op (node_id | subgraph))+ attr_list?
 
-
-private edgeRHS ::= (edge_op (node_id | subgraph))+
 
 node_id ::= identifier port?
 port ::= ':' identifier ( ':' compass_pt )?
