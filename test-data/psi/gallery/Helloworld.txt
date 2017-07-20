@@ -1,4 +1,4 @@
-GraphvizFile: a.gv
+GraphvizFile: Helloworld.gv
   GraphvizGraphImpl(GRAPH)
     PsiElement(digraph)('digraph')
     GraphvizIdentifierImpl(IDENTIFIER)
