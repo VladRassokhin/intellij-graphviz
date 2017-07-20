@@ -31,6 +31,7 @@ ID=[_[:letter:]][0-9_[:letter:]]*
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"
 NUMBER=-?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))
 HTML_STRING=<([^<>]+|<[^<>]+>)*>
+PORT_ID=([NESW]{1,2})|C|_
 
 %%
 <YYINITIAL> {
@@ -52,18 +53,9 @@ HTML_STRING=<([^<>]+|<[^<>]+>)*>
   "strict"                    { return KW_STRICT; }
   "graph"                     { return KW_GRAPH; }
   "digraph"                   { return KW_DIGRAPH; }
+  "subgraph"                  { return KW_SUBGRAPH; }
   "node"                      { return KW_NODE; }
   "edge"                      { return KW_EDGE; }
-  "N"                         { return KW_N; }
-  "NE"                        { return KW_NE; }
-  "E"                         { return KW_E; }
-  "SE"                        { return KW_SE; }
-  "S"                         { return KW_S; }
-  "SW"                        { return KW_SW; }
-  "W"                         { return KW_W; }
-  "NW"                        { return KW_NW; }
-  "C"                         { return KW_C; }
-  "KW_SUBGRAPH"               { return KW_SUBGRAPH; }
 
   {LINE_COMMENT}              { return LINE_COMMENT; }
   {BLOCK_COMMENT}             { return BLOCK_COMMENT; }
@@ -71,6 +63,7 @@ HTML_STRING=<([^<>]+|<[^<>]+>)*>
   {DOUBLE_QUOTED_STRING}      { return DOUBLE_QUOTED_STRING; }
   {NUMBER}                    { return NUMBER; }
   {HTML_STRING}               { return HTML_STRING; }
+  {PORT_ID}                   { return PORT_ID; }
 
 }
 

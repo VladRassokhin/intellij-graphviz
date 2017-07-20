@@ -8,6 +8,7 @@ import org.intellij.plugins.graphviz.psi.impl.*;
 
 public interface GraphvizElementTypes {
 
+  IElementType ASGN_STMT = new GraphvizElementType("ASGN_STMT");
   IElementType ATTR_LIST = new GraphvizElementType("ATTR_LIST");
   IElementType ATTR_LIST_ELEMENT = new GraphvizElementType("ATTR_LIST_ELEMENT");
   IElementType ATTR_STMT = new GraphvizElementType("ATTR_STMT");
@@ -36,26 +37,18 @@ public interface GraphvizElementTypes {
   IElementType EDGE_UNDIR = new GraphvizTokenType("--");
   IElementType HTML_STRING = new GraphvizTokenType("HTML_STRING");
   IElementType ID = new GraphvizTokenType("ID");
-  IElementType KW_C = new GraphvizTokenType("C");
   IElementType KW_DIGRAPH = new GraphvizTokenType("digraph");
-  IElementType KW_E = new GraphvizTokenType("E");
   IElementType KW_EDGE = new GraphvizTokenType("edge");
   IElementType KW_GRAPH = new GraphvizTokenType("graph");
-  IElementType KW_N = new GraphvizTokenType("N");
-  IElementType KW_NE = new GraphvizTokenType("NE");
   IElementType KW_NODE = new GraphvizTokenType("node");
-  IElementType KW_NW = new GraphvizTokenType("NW");
-  IElementType KW_S = new GraphvizTokenType("S");
-  IElementType KW_SE = new GraphvizTokenType("SE");
   IElementType KW_STRICT = new GraphvizTokenType("strict");
-  IElementType KW_SUBGRAPH = new GraphvizTokenType("KW_SUBGRAPH");
-  IElementType KW_SW = new GraphvizTokenType("SW");
-  IElementType KW_W = new GraphvizTokenType("W");
+  IElementType KW_SUBGRAPH = new GraphvizTokenType("subgraph");
   IElementType LINE_COMMENT = new GraphvizTokenType("line_comment");
   IElementType L_BRACKET = new GraphvizTokenType("[");
   IElementType L_CURLY = new GraphvizTokenType("{");
   IElementType L_PAREN = new GraphvizTokenType("(");
   IElementType NUMBER = new GraphvizTokenType("NUMBER");
+  IElementType PORT_ID = new GraphvizTokenType("PORT_ID");
   IElementType R_BRACKET = new GraphvizTokenType("]");
   IElementType R_CURLY = new GraphvizTokenType("}");
   IElementType R_PAREN = new GraphvizTokenType(")");
@@ -65,7 +58,10 @@ public interface GraphvizElementTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == ATTR_LIST) {
+       if (type == ASGN_STMT) {
+        return new GraphvizAsgnStmtImpl(node);
+      }
+      else if (type == ATTR_LIST) {
         return new GraphvizAttrListImpl(node);
       }
       else if (type == ATTR_LIST_ELEMENT) {

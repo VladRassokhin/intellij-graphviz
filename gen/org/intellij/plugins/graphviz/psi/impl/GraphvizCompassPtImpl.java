@@ -26,4 +26,16 @@ public class GraphvizCompassPtImpl extends ASTWrapperPsiElement implements Graph
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getId() {
+    return findChildByType(ID);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getPortId() {
+    return findChildByType(PORT_ID);
+  }
+
 }

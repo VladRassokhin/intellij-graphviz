@@ -8,13 +8,13 @@ import com.intellij.psi.PsiElement;
 public interface GraphvizStmt extends PsiElement {
 
   @Nullable
+  GraphvizAsgnStmt getAsgnStmt();
+
+  @Nullable
   GraphvizAttrStmt getAttrStmt();
 
   @Nullable
   GraphvizEdgeStmt getEdgeStmt();
-
-  @NotNull
-  List<GraphvizIdentifier> getIdentifierList();
 
   @Nullable
   GraphvizNodeStmt getNodeStmt();

@@ -11,14 +11,14 @@ import static org.intellij.plugins.graphviz.GraphvizElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.intellij.plugins.graphviz.psi.*;
 
-public class GraphvizStmtImpl extends ASTWrapperPsiElement implements GraphvizStmt {
+public class GraphvizAsgnStmtImpl extends ASTWrapperPsiElement implements GraphvizAsgnStmt {
 
-  public GraphvizStmtImpl(ASTNode node) {
+  public GraphvizAsgnStmtImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GraphvizElementVisitor visitor) {
-    visitor.visitStmt(this);
+    visitor.visitAsgnStmt(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,33 +27,9 @@ public class GraphvizStmtImpl extends ASTWrapperPsiElement implements GraphvizSt
   }
 
   @Override
-  @Nullable
-  public GraphvizAsgnStmt getAsgnStmt() {
-    return findChildByClass(GraphvizAsgnStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizAttrStmt getAttrStmt() {
-    return findChildByClass(GraphvizAttrStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizEdgeStmt getEdgeStmt() {
-    return findChildByClass(GraphvizEdgeStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizNodeStmt getNodeStmt() {
-    return findChildByClass(GraphvizNodeStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizSubgraph getSubgraph() {
-    return findChildByClass(GraphvizSubgraph.class);
+  @NotNull
+  public List<GraphvizIdentifier> getIdentifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
   }
 
 }

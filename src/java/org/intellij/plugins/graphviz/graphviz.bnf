@@ -53,17 +53,9 @@
     KW_STRICT='strict'
     KW_GRAPH='graph'
     KW_DIGRAPH='digraph'
+    KW_SUBGRAPH='subgraph'
     KW_NODE='node'
     KW_EDGE='edge'
-    KW_N='N'
-    KW_NE='NE'
-    KW_E='E'
-    KW_SE='SE'
-    KW_S='S'
-    KW_SW='SW'
-    KW_W='W'
-    KW_NW='NW'
-    KW_C='C'
 
 
     // Other elements
@@ -73,7 +65,7 @@
     DOUBLE_QUOTED_STRING="regexp:\"([^\\\"\r\n]|\\[^\r\n])*\""
     NUMBER='regexp:-?((\d+(\.\d*)?)|(\.\d+))'
     HTML_STRING='regexp:<([^<>]+|<[^<>]+>)*>'
-
+    PORT_ID="regexp:([NESW]{1,2})|C|_"
   ]
 
 }
@@ -91,14 +83,15 @@ attr_list ::= ('[' attr_list_element* ']')+ {
 attr_list_element ::= identifier ('=' identifier)? ( ';' | ',' )?
 
 stmt ::= edge_stmt
+       | asgn_stmt
        | node_stmt
        | attr_stmt
-       | identifier '=' identifier
        | subgraph
 
 node_stmt ::= node_id attr_list?
 attr_stmt ::= (KW_GRAPH | KW_NODE | KW_EDGE) attr_list
 edge_stmt ::= (node_id | subgraph) (edge_op (node_id | subgraph))+ attr_list?
+asgn_stmt ::= identifier '=' identifier
 
 
 node_id ::= identifier port?
@@ -106,7 +99,7 @@ port ::= ':' identifier ( ':' compass_pt )?
        | ':' compass_pt
 
 
-compass_pt ::= KW_N | KW_NE | KW_E | KW_SE | KW_S | KW_SW | KW_W | KW_NW | KW_C | '_'
+compass_pt ::= PORT_ID | ID
 
 // Additional
 edge_op ::= '->' | '--'

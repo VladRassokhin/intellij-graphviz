@@ -7,6 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public class GraphvizElementVisitor extends PsiElementVisitor {
 
+  public void visitAsgnStmt(@NotNull GraphvizAsgnStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitAttrList(@NotNull GraphvizAttrList o) {
     visitPsiElement(o);
   }

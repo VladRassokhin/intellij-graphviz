@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GraphvizCompassPt extends PsiElement {
+public interface GraphvizAsgnStmt extends PsiElement {
 
-  @Nullable
-  PsiElement getId();
-
-  @Nullable
-  PsiElement getPortId();
+  @NotNull
+  List<GraphvizIdentifier> getIdentifierList();
 
 }

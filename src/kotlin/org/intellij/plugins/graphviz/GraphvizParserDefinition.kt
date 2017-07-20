@@ -93,12 +93,7 @@ open class GraphvizParserDefinition : ParserDefinition {
         KW_NODE,
         KW_EDGE
     )
-    val COMPASS_KEYWORDS: TokenSet = TokenSet.create(
-        KW_N, KW_NE,
-        KW_E, KW_SE,
-        KW_S, KW_SW,
-        KW_W, KW_NW,
-        KW_C, UNDERSCORE)
+    val COMPASS_KEYWORDS: TokenSet = TokenSet.create(PORT_ID)
     val KEYWORDS: TokenSet = TokenSet.orSet(BASIC_KEYWORDS, COMPASS_KEYWORDS)
 
     val LITERALS: TokenSet = TokenSet.orSet(IDENTIFYING_LITERALS)
