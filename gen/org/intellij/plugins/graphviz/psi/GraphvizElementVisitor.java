@@ -11,16 +11,12 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
     visitStmt(o);
   }
 
-  public void visitAttrList(@NotNull GraphvizAttrList o) {
-    visitPsiElement(o);
-  }
-
-  public void visitAttrListElement(@NotNull GraphvizAttrListElement o) {
-    visitPsiElement(o);
-  }
-
   public void visitAttrStmt(@NotNull GraphvizAttrStmt o) {
     visitStmt(o);
+  }
+
+  public void visitAttribute(@NotNull GraphvizAttribute o) {
+    visitPsiElement(o);
   }
 
   public void visitCompassPt(@NotNull GraphvizCompassPt o) {
@@ -71,16 +67,13 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitStmtList(@NotNull GraphvizStmtList o) {
-    visitPsiElement(o);
-  }
-
   public void visitStringLiteral(@NotNull GraphvizStringLiteral o) {
     visitPsiElement(o);
   }
 
   public void visitSubgraph(@NotNull GraphvizSubgraph o) {
     visitStmt(o);
+    // visitGraph(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

@@ -34,8 +34,8 @@ public class GraphvizGraphImpl extends ASTWrapperPsiElement implements GraphvizG
 
   @Override
   @NotNull
-  public GraphvizStmtList getStmtList() {
-    return findNotNullChildByClass(GraphvizStmtList.class);
+  public List<GraphvizStmt> getStatements() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizStmt.class);
   }
 
 }

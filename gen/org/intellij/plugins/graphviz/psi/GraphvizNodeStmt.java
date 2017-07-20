@@ -7,10 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface GraphvizNodeStmt extends GraphvizStmt {
 
-  @Nullable
-  GraphvizAttrList getAttrList();
-
   @NotNull
   GraphvizNodeId getNodeId();
+
+  @NotNull
+  List<GraphvizAttribute> getAttributes();
 
 }

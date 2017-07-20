@@ -11,6 +11,6 @@ public interface GraphvizGraph extends PsiElement {
   GraphvizIdentifier getIdentifier();
 
   @NotNull
-  GraphvizStmtList getStmtList();
+  List<GraphvizStmt> getStatements();
 
 }

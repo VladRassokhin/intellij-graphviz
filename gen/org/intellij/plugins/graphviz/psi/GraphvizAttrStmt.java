@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface GraphvizAttrStmt extends GraphvizStmt {
 
   @NotNull
-  GraphvizAttrList getAttrList();
+  List<GraphvizAttribute> getAttributes();
 
 }

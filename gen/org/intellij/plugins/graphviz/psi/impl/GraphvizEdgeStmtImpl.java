@@ -26,27 +26,9 @@ public class GraphvizEdgeStmtImpl extends GraphvizStmtImpl implements GraphvizEd
   }
 
   @Override
-  @Nullable
-  public GraphvizAttrList getAttrList() {
-    return findChildByClass(GraphvizAttrList.class);
-  }
-
-  @Override
   @NotNull
-  public List<GraphvizEdgeOp> getEdgeOpList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizEdgeOp.class);
-  }
-
-  @Override
-  @NotNull
-  public List<GraphvizNodeId> getNodeIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizNodeId.class);
-  }
-
-  @Override
-  @NotNull
-  public List<GraphvizSubgraph> getSubgraphList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizSubgraph.class);
+  public List<GraphvizAttribute> getAttributes() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizAttribute.class);
   }
 
 }

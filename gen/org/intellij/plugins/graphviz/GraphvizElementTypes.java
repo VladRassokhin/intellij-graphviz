@@ -9,8 +9,7 @@ import org.intellij.plugins.graphviz.psi.impl.*;
 public interface GraphvizElementTypes {
 
   IElementType ASGN_STMT = new GraphvizElementType("ASGN_STMT");
-  IElementType ATTR_LIST = new GraphvizElementType("ATTR_LIST");
-  IElementType ATTR_LIST_ELEMENT = new GraphvizElementType("ATTR_LIST_ELEMENT");
+  IElementType ATTRIBUTE = new GraphvizElementType("ATTRIBUTE");
   IElementType ATTR_STMT = new GraphvizElementType("ATTR_STMT");
   IElementType COMPASS_PT = new GraphvizElementType("COMPASS_PT");
   IElementType EDGE_OP = new GraphvizElementType("EDGE_OP");
@@ -24,7 +23,6 @@ public interface GraphvizElementTypes {
   IElementType NUMBER_LITERAL = new GraphvizElementType("NUMBER_LITERAL");
   IElementType PORT = new GraphvizElementType("PORT");
   IElementType STMT = new GraphvizElementType("STMT");
-  IElementType STMT_LIST = new GraphvizElementType("STMT_LIST");
   IElementType STRING_LITERAL = new GraphvizElementType("STRING_LITERAL");
   IElementType SUBGRAPH = new GraphvizElementType("SUBGRAPH");
 
@@ -61,11 +59,8 @@ public interface GraphvizElementTypes {
        if (type == ASGN_STMT) {
         return new GraphvizAsgnStmtImpl(node);
       }
-      else if (type == ATTR_LIST) {
-        return new GraphvizAttrListImpl(node);
-      }
-      else if (type == ATTR_LIST_ELEMENT) {
-        return new GraphvizAttrListElementImpl(node);
+      else if (type == ATTRIBUTE) {
+        return new GraphvizAttributeImpl(node);
       }
       else if (type == ATTR_STMT) {
         return new GraphvizAttrStmtImpl(node);
@@ -102,9 +97,6 @@ public interface GraphvizElementTypes {
       }
       else if (type == PORT) {
         return new GraphvizPortImpl(node);
-      }
-      else if (type == STMT_LIST) {
-        return new GraphvizStmtListImpl(node);
       }
       else if (type == STRING_LITERAL) {
         return new GraphvizStringLiteralImpl(node);

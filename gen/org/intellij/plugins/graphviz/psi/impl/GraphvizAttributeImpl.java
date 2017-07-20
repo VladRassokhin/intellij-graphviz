@@ -11,14 +11,14 @@ import static org.intellij.plugins.graphviz.GraphvizElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.intellij.plugins.graphviz.psi.*;
 
-public class GraphvizAttrListImpl extends ASTWrapperPsiElement implements GraphvizAttrList {
+public class GraphvizAttributeImpl extends ASTWrapperPsiElement implements GraphvizAttribute {
 
-  public GraphvizAttrListImpl(ASTNode node) {
+  public GraphvizAttributeImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GraphvizElementVisitor visitor) {
-    visitor.visitAttrList(this);
+    visitor.visitAttribute(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,8 +28,16 @@ public class GraphvizAttrListImpl extends ASTWrapperPsiElement implements Graphv
 
   @Override
   @NotNull
-  public List<GraphvizAttrListElement> getAttrListElementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizAttrListElement.class);
+  public GraphvizIdentifier getKey() {
+    List<GraphvizIdentifier> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
+    return p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public GraphvizIdentifier getValue() {
+    List<GraphvizIdentifier> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }

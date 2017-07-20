@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GraphvizSubgraph extends GraphvizStmt {
+public interface GraphvizSubgraph extends GraphvizStmt, GraphvizGraph {
 
   @Nullable
   GraphvizIdentifier getIdentifier();
 
   @NotNull
-  GraphvizStmtList getStmtList();
+  List<GraphvizStmt> getStatements();
 
 }

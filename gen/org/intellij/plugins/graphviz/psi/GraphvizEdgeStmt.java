@@ -7,16 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface GraphvizEdgeStmt extends GraphvizStmt {
 
-  @Nullable
-  GraphvizAttrList getAttrList();
-
   @NotNull
-  List<GraphvizEdgeOp> getEdgeOpList();
-
-  @NotNull
-  List<GraphvizNodeId> getNodeIdList();
-
-  @NotNull
-  List<GraphvizSubgraph> getSubgraphList();
+  List<GraphvizAttribute> getAttributes();
 
 }

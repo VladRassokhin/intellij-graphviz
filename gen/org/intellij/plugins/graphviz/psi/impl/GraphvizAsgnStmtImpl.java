@@ -27,8 +27,16 @@ public class GraphvizAsgnStmtImpl extends GraphvizStmtImpl implements GraphvizAs
 
   @Override
   @NotNull
-  public List<GraphvizIdentifier> getIdentifierList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
+  public GraphvizIdentifier getKey() {
+    List<GraphvizIdentifier> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
+    return p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public GraphvizIdentifier getValue() {
+    List<GraphvizIdentifier> p1 = PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizIdentifier.class);
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }

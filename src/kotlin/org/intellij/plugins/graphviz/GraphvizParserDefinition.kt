@@ -98,7 +98,7 @@ open class GraphvizParserDefinition : ParserDefinition {
 
     val LITERALS: TokenSet = TokenSet.orSet(IDENTIFYING_LITERALS)
     val VALUES: TokenSet = TokenSet.orSet(LITERALS)
-    val CONTAINERS: TokenSet = TokenSet.create(STMT_LIST, ATTR_LIST)
+    val CONTAINERS: TokenSet = TokenSet.create(GRAPH, SUBGRAPH)
 
     val SYMBOLS: TokenSet = TokenSet.create(COMMA, COLON, SEMICOLON, ASGN)
   }

@@ -76,22 +76,31 @@ graph    ::= KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list {
     KW_STRICT=""
     KW_GRAPH=""
     KW_DIGRAPH=""
+    Statements="stmt"
   ]
 }
 subgraph ::= ( KW_SUBGRAPH identifier? )? stmt_list {
   extends=stmt
+  implements=graph
   methods=[
     KW_SUBGRAPH=""
+    Statements="stmt"
   ]
 }
 
-stmt_list ::=  '{' (stmt ';'?)* '}' {
+private stmt_list ::=  '{' (stmt ';'?)* '}' {
   pin=1
 }
-attr_list ::= ('[' attr_list_element* ']')+ {
+private attr_list ::= ('[' attribute* ']')+ {
   pin('.*')=1
 }
-attr_list_element ::= identifier ('=' identifier)? ( ';' | ',' )?
+attribute ::= identifier ('=' identifier)? ( ';' | ',' )? {
+  methods=[
+    identifier=""
+    Key="identifier[0]"
+    Value="identifier[1]"
+  ]
+}
 
 stmt ::= edge_stmt
        | asgn_stmt
@@ -99,16 +108,36 @@ stmt ::= edge_stmt
        | attr_stmt
        | subgraph
 
-node_stmt ::= node_id attr_list?
+node_stmt ::= node_id attr_list? {
+  methods=[
+    Attributes="attribute"
+  ]
+}
 attr_stmt ::= (KW_GRAPH | KW_NODE | KW_EDGE) attr_list {
   methods=[
     KW_GRAPH=""
     KW_NODE=""
     KW_EDGE=""
+    Attributes="attribute"
   ]
 }
-edge_stmt ::= (node_id | subgraph) (edge_op (node_id | subgraph))+ attr_list?
-asgn_stmt ::= identifier '=' identifier
+edge_stmt ::= edge_operand (edge_op edge_operand)+ attr_list? {
+  methods=[
+    node_id=""
+    subgraph=""
+    edge_op=""
+    Attributes="attribute"
+  ]
+}
+private edge_operand::=(node_id | subgraph)
+
+asgn_stmt ::= identifier '=' identifier {
+  methods=[
+    identifier=""
+    Key="identifier[0]"
+    Value="identifier[1]"
+  ]
+}
 
 
 node_id ::= identifier port?

@@ -27,8 +27,8 @@ public class GraphvizAttrStmtImpl extends GraphvizStmtImpl implements GraphvizAt
 
   @Override
   @NotNull
-  public GraphvizAttrList getAttrList() {
-    return findNotNullChildByClass(GraphvizAttrList.class);
+  public List<GraphvizAttribute> getAttributes() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizAttribute.class);
   }
 
 }

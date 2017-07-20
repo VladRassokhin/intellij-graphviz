@@ -26,15 +26,15 @@ public class GraphvizNodeStmtImpl extends GraphvizStmtImpl implements GraphvizNo
   }
 
   @Override
-  @Nullable
-  public GraphvizAttrList getAttrList() {
-    return findChildByClass(GraphvizAttrList.class);
+  @NotNull
+  public GraphvizNodeId getNodeId() {
+    return findNotNullChildByClass(GraphvizNodeId.class);
   }
 
   @Override
   @NotNull
-  public GraphvizNodeId getNodeId() {
-    return findNotNullChildByClass(GraphvizNodeId.class);
+  public List<GraphvizAttribute> getAttributes() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizAttribute.class);
   }
 
 }

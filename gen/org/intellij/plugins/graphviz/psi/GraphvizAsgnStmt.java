@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface GraphvizAsgnStmt extends GraphvizStmt {
 
   @NotNull
-  List<GraphvizIdentifier> getIdentifierList();
+  GraphvizIdentifier getKey();
+
+  @Nullable
+  GraphvizIdentifier getValue();
 
 }

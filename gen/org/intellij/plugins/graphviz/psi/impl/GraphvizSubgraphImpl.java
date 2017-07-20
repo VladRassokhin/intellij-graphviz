@@ -33,8 +33,8 @@ public class GraphvizSubgraphImpl extends GraphvizStmtImpl implements GraphvizSu
 
   @Override
   @NotNull
-  public GraphvizStmtList getStmtList() {
-    return findNotNullChildByClass(GraphvizStmtList.class);
+  public List<GraphvizStmt> getStatements() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GraphvizStmt.class);
   }
 
 }

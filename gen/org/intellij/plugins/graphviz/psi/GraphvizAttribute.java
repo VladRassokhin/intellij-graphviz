@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GraphvizAttrListElement extends PsiElement {
+public interface GraphvizAttribute extends PsiElement {
 
   @NotNull
-  List<GraphvizIdentifier> getIdentifierList();
+  GraphvizIdentifier getKey();
+
+  @Nullable
+  GraphvizIdentifier getValue();
 
 }
