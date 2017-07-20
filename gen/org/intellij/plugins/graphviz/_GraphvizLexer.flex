@@ -27,6 +27,12 @@ WHITE_SPACE=\s+
 
 LINE_COMMENT=("//".*)|(#.*)
 BLOCK_COMMENT="/"\*([^*]|\*[^/])*\*?(\*"/")?
+KW_STRICT=[sS][tT][rR][iI][cC][tT]
+KW_GRAPH=[gG][rR][aA][pP][hH]
+KW_DIGRAPH=[dD][iI][gG][rR][aA][pP][hH]
+KW_SUBGRAPH=[sS][uU][bB][gG][rR][aA][pP][hH]
+KW_NODE=[nN][oO][dD][eE]
+KW_EDGE=[eE][dD][gG][eE]
 ID=[_[:letter:]][0-9_[:letter:]]*
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"
 NUMBER=-?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))
@@ -50,15 +56,15 @@ PORT_ID=([NESW]{1,2})|C|_
   "_"                         { return UNDERSCORE; }
   "->"                        { return EDGE_DIR; }
   "--"                        { return EDGE_UNDIR; }
-  "strict"                    { return KW_STRICT; }
-  "graph"                     { return KW_GRAPH; }
-  "digraph"                   { return KW_DIGRAPH; }
-  "subgraph"                  { return KW_SUBGRAPH; }
-  "node"                      { return KW_NODE; }
-  "edge"                      { return KW_EDGE; }
 
   {LINE_COMMENT}              { return LINE_COMMENT; }
   {BLOCK_COMMENT}             { return BLOCK_COMMENT; }
+  {KW_STRICT}                 { return KW_STRICT; }
+  {KW_GRAPH}                  { return KW_GRAPH; }
+  {KW_DIGRAPH}                { return KW_DIGRAPH; }
+  {KW_SUBGRAPH}               { return KW_SUBGRAPH; }
+  {KW_NODE}                   { return KW_NODE; }
+  {KW_EDGE}                   { return KW_EDGE; }
   {ID}                        { return ID; }
   {DOUBLE_QUOTED_STRING}      { return DOUBLE_QUOTED_STRING; }
   {NUMBER}                    { return NUMBER; }

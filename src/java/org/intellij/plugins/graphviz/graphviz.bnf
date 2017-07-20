@@ -49,13 +49,13 @@
     EDGE_DIR='->'
     EDGE_UNDIR='--'
 
-    // Keywords TODO: make them case-insensitive
-    KW_STRICT='strict'
-    KW_GRAPH='graph'
-    KW_DIGRAPH='digraph'
-    KW_SUBGRAPH='subgraph'
-    KW_NODE='node'
-    KW_EDGE='edge'
+    // Keywords
+    KW_STRICT='regexp:[sS][tT][rR][iI][cC][tT]'
+    KW_GRAPH='regexp:[gG][rR][aA][pP][hH]'
+    KW_DIGRAPH='regexp:[dD][iI][gG][rR][aA][pP][hH]'
+    KW_SUBGRAPH='regexp:[sS][uU][bB][gG][rR][aA][pP][hH]'
+    KW_NODE='regexp:[nN][oO][dD][eE]'
+    KW_EDGE='regexp:[eE][dD][gG][eE]'
 
 
     // Other elements

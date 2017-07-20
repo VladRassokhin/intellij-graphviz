@@ -66,7 +66,7 @@ public class GraphvizLexerTest extends BaseLexerTestCase {
   }
 
   public void testHelloWorldStrip() throws Exception {
-    doTest("digraph G { Hello->World }", "digraph ('digraph')\n" +
+    doTest("diGRaph G { Hello->World }", "digraph ('diGRaph')\n" +
         "WHITE_SPACE (' ')\n" +
         "ID ('G')\n" +
         "WHITE_SPACE (' ')\n" +
