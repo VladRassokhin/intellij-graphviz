@@ -1,7 +1,7 @@
 GraphvizFile: Unix.gv
   PsiComment(block_comment)('/* courtesy Ian Darwin and Geoff Collyer, Softquad Inc. */')
   GraphvizGraphImpl(GRAPH)
-    PsiElement(digraph)('digraph')
+    PsiElement(KW_DIGRAPH)('digraph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('unix')
@@ -17,7 +17,7 @@ GraphvizFile: Unix.gv
             PsiElement(DOUBLE_QUOTED_STRING)('"6,6"')
       PsiElement(;)(';')
       GraphvizAttrStmtImpl(ATTR_STMT)
-        PsiElement(node)('node')
+        PsiElement(KW_NODE)('node')
         GraphvizAttrListImpl(ATTR_LIST)
           PsiElement([)('[')
           GraphvizAttrListElementImpl(ATTR_LIST_ELEMENT)

@@ -1,6 +1,6 @@
 GraphvizFile: Process.gv
   GraphvizGraphImpl(GRAPH)
-    PsiElement(graph)('graph')
+    PsiElement(KW_GRAPH)('graph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('G')

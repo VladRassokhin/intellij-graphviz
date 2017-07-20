@@ -1,6 +1,6 @@
 GraphvizFile: Twopi.gv
   GraphvizGraphImpl(GRAPH)
-    PsiElement(digraph)('digraph')
+    PsiElement(KW_DIGRAPH)('digraph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('G')

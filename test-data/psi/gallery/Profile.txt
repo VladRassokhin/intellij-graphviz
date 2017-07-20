@@ -1,6 +1,6 @@
 GraphvizFile: Profile.gv
   GraphvizGraphImpl(GRAPH)
-    PsiElement(digraph)('digraph')
+    PsiElement(KW_DIGRAPH)('digraph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('prof')
@@ -25,7 +25,7 @@ GraphvizFile: Profile.gv
             PsiElement(ID)('fill')
       PsiElement(;)(';')
       GraphvizAttrStmtImpl(ATTR_STMT)
-        PsiElement(node)('node')
+        PsiElement(KW_NODE)('node')
         GraphvizAttrListImpl(ATTR_LIST)
           PsiElement([)('[')
           GraphvizAttrListElementImpl(ATTR_LIST_ELEMENT)

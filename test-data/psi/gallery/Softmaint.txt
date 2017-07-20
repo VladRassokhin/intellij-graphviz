@@ -1,6 +1,6 @@
 GraphvizFile: Softmaint.gv
   GraphvizGraphImpl(GRAPH)
-    PsiElement(digraph)('digraph')
+    PsiElement(KW_DIGRAPH)('digraph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('G')
@@ -31,7 +31,7 @@ GraphvizFile: Softmaint.gv
           GraphvizStringLiteralImpl(STRING_LITERAL)
             PsiElement(DOUBLE_QUOTED_STRING)('""')
       GraphvizAttrStmtImpl(ATTR_STMT)
-        PsiElement(node)('node')
+        PsiElement(KW_NODE)('node')
         GraphvizAttrListImpl(ATTR_LIST)
           PsiElement([)('[')
           GraphvizAttrListElementImpl(ATTR_LIST_ELEMENT)

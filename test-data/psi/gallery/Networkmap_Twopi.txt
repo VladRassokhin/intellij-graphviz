@@ -1,7 +1,7 @@
 GraphvizFile: Networkmap_Twopi.gv
   PsiComment(block_comment)('/* contributed by  Sancho Lerena, http://pandorafms.org\n\nAbout the graph: this is an automated network map generated with Pandora\nFMS, this map is a visual representation of the network discovery done by\nthe recon server, which sweeps the network, and identify hosts in a network\nand the full chain of hosts in the route to discovered networks.\n\ncommand:       \n\ntwopi -Tcmapx -onetworkmap_twopi_1.map -Tpng -onetworkmap_twopi.png networkmap_twopi.gv.txt\n\n*/')
   GraphvizGraphImpl(GRAPH)
-    PsiElement(graph)('graph')
+    PsiElement(KW_GRAPH)('graph')
     GraphvizIdentifierImpl(IDENTIFIER)
       GraphvizIdLiteralImpl(ID_LITERAL)
         PsiElement(ID)('networkmap')

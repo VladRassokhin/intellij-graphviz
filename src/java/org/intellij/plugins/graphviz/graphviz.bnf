@@ -71,9 +71,18 @@
 }
 
 root ::= graph?
-graph    ::= KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list
+graph    ::= KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list {
+  methods=[
+    KW_STRICT=""
+    KW_GRAPH=""
+    KW_DIGRAPH=""
+  ]
+}
 subgraph ::= ( KW_SUBGRAPH identifier? )? stmt_list {
   extends=stmt
+  methods=[
+    KW_SUBGRAPH=""
+  ]
 }
 
 stmt_list ::=  '{' (stmt ';'?)* '}' {
@@ -91,7 +100,13 @@ stmt ::= edge_stmt
        | subgraph
 
 node_stmt ::= node_id attr_list?
-attr_stmt ::= (KW_GRAPH | KW_NODE | KW_EDGE) attr_list
+attr_stmt ::= (KW_GRAPH | KW_NODE | KW_EDGE) attr_list {
+  methods=[
+    KW_GRAPH=""
+    KW_NODE=""
+    KW_EDGE=""
+  ]
+}
 edge_stmt ::= (node_id | subgraph) (edge_op (node_id | subgraph))+ attr_list?
 asgn_stmt ::= identifier '=' identifier
 
