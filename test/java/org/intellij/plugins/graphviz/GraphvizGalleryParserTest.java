@@ -21,7 +21,7 @@ import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-@TestDataPath("$CONTENT_ROOT/test-data/psi/")
+@TestDataPath("$CONTENT_ROOT/test-data/psi/gallery")
 public class GraphvizGalleryParserTest extends ParsingTestCase {
   private GraphvizGalleryParserTest(@NonNls @NotNull String dataPath, @NotNull String fileExt, final boolean lowercaseFirstLetter, @NotNull ParserDefinition... definitions) {
     super(dataPath, fileExt, lowercaseFirstLetter, definitions);
