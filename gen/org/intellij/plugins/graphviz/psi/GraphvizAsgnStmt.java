@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GraphvizAsgnStmt extends PsiElement {
+public interface GraphvizAsgnStmt extends GraphvizStmt {
 
   @NotNull
   List<GraphvizIdentifier> getIdentifierList();

@@ -103,9 +103,6 @@ public interface GraphvizElementTypes {
       else if (type == PORT) {
         return new GraphvizPortImpl(node);
       }
-      else if (type == STMT) {
-        return new GraphvizStmtImpl(node);
-      }
       else if (type == STMT_LIST) {
         return new GraphvizStmtListImpl(node);
       }

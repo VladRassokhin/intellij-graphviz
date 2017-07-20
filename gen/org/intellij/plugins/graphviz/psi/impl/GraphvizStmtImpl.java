@@ -11,7 +11,7 @@ import static org.intellij.plugins.graphviz.GraphvizElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.intellij.plugins.graphviz.psi.*;
 
-public class GraphvizStmtImpl extends ASTWrapperPsiElement implements GraphvizStmt {
+public abstract class GraphvizStmtImpl extends ASTWrapperPsiElement implements GraphvizStmt {
 
   public GraphvizStmtImpl(ASTNode node) {
     super(node);
@@ -24,36 +24,6 @@ public class GraphvizStmtImpl extends ASTWrapperPsiElement implements GraphvizSt
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof GraphvizElementVisitor) accept((GraphvizElementVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizAsgnStmt getAsgnStmt() {
-    return findChildByClass(GraphvizAsgnStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizAttrStmt getAttrStmt() {
-    return findChildByClass(GraphvizAttrStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizEdgeStmt getEdgeStmt() {
-    return findChildByClass(GraphvizEdgeStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizNodeStmt getNodeStmt() {
-    return findChildByClass(GraphvizNodeStmt.class);
-  }
-
-  @Override
-  @Nullable
-  public GraphvizSubgraph getSubgraph() {
-    return findChildByClass(GraphvizSubgraph.class);
   }
 
 }

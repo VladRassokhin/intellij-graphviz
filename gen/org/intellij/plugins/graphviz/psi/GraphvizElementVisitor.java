@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public class GraphvizElementVisitor extends PsiElementVisitor {
 
   public void visitAsgnStmt(@NotNull GraphvizAsgnStmt o) {
-    visitPsiElement(o);
+    visitStmt(o);
   }
 
   public void visitAttrList(@NotNull GraphvizAttrList o) {
@@ -20,7 +20,7 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
   }
 
   public void visitAttrStmt(@NotNull GraphvizAttrStmt o) {
-    visitPsiElement(o);
+    visitStmt(o);
   }
 
   public void visitCompassPt(@NotNull GraphvizCompassPt o) {
@@ -32,7 +32,7 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
   }
 
   public void visitEdgeStmt(@NotNull GraphvizEdgeStmt o) {
-    visitPsiElement(o);
+    visitStmt(o);
   }
 
   public void visitGraph(@NotNull GraphvizGraph o) {
@@ -56,7 +56,7 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
   }
 
   public void visitNodeStmt(@NotNull GraphvizNodeStmt o) {
-    visitPsiElement(o);
+    visitStmt(o);
   }
 
   public void visitNumberLiteral(@NotNull GraphvizNumberLiteral o) {
@@ -80,7 +80,7 @@ public class GraphvizElementVisitor extends PsiElementVisitor {
   }
 
   public void visitSubgraph(@NotNull GraphvizSubgraph o) {
-    visitPsiElement(o);
+    visitStmt(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

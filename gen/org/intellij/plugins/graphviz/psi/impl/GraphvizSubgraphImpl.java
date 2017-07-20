@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.intellij.plugins.graphviz.GraphvizElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.intellij.plugins.graphviz.psi.*;
 
-public class GraphvizSubgraphImpl extends ASTWrapperPsiElement implements GraphvizSubgraph {
+public class GraphvizSubgraphImpl extends GraphvizStmtImpl implements GraphvizSubgraph {
 
   public GraphvizSubgraphImpl(ASTNode node) {
     super(node);

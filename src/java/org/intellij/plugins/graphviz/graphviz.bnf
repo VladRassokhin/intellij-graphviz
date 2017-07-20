@@ -67,12 +67,14 @@
     HTML_STRING='regexp:<([^<>]+|<[^<>]+>)*>'
     PORT_ID="regexp:([NESW]{1,2})|C|_"
   ]
-
+  extends(".*_stmt")=stmt
 }
 
 root ::= graph?
 graph    ::= KW_STRICT? (KW_GRAPH | KW_DIGRAPH) identifier? stmt_list
-subgraph ::= ( KW_SUBGRAPH identifier? )? stmt_list
+subgraph ::= ( KW_SUBGRAPH identifier? )? stmt_list {
+  extends=stmt
+}
 
 stmt_list ::=  '{' (stmt ';'?)* '}' {
   pin=1
