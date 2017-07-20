@@ -64,7 +64,7 @@
     // TODO: Add tailing '?' to string
     DOUBLE_QUOTED_STRING="regexp:\"([^\\\"\r\n]|\\[^\r\n])*\""
     NUMBER='regexp:-?((\d+(\.\d*)?)|(\.\d+))'
-    HTML_STRING='regexp:<([^<>]+|<[^<>]+>)*>'
+    HTML_STRING='regexp:<([^<>]*|<[^<>]*>)+>'
     PORT_ID="regexp:([NESW]{1,2})|C|_"
   ]
   extends(".*_stmt")=stmt

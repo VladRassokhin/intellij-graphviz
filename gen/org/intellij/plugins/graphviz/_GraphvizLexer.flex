@@ -30,7 +30,7 @@ BLOCK_COMMENT="/"\*([^*]|\*[^/])*\*?(\*"/")?
 ID=[_[:letter:]][0-9_[:letter:]]*
 DOUBLE_QUOTED_STRING=\"([^\\\"\r\n]|\\[^\r\n])*\"
 NUMBER=-?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))
-HTML_STRING=<([^<>]+|<[^<>]+>)*>
+HTML_STRING=<([^<>]*|<[^<>]*>)+>
 PORT_ID=([NESW]{1,2})|C|_
 
 %%
