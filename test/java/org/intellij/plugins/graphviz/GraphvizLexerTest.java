@@ -50,7 +50,7 @@ public class GraphvizLexerTest extends BaseLexerTestCase {
 
 
   public void testHelloWorld() throws Exception {
-    doTest("digraph G { Hello -> World }", "digraph ('digraph')\n" +
+    doTest("digraph G { Hello -> World }", "KW_DIGRAPH ('digraph')\n" +
         "WHITE_SPACE (' ')\n" +
         "ID ('G')\n" +
         "WHITE_SPACE (' ')\n" +
@@ -66,7 +66,7 @@ public class GraphvizLexerTest extends BaseLexerTestCase {
   }
 
   public void testHelloWorldStrip() throws Exception {
-    doTest("diGRaph G { Hello->World }", "digraph ('diGRaph')\n" +
+    doTest("diGRaph G { Hello->World }", "KW_DIGRAPH ('diGRaph')\n" +
         "WHITE_SPACE (' ')\n" +
         "ID ('G')\n" +
         "WHITE_SPACE (' ')\n" +
@@ -80,7 +80,7 @@ public class GraphvizLexerTest extends BaseLexerTestCase {
   }
 
   public void testHelloWorldStrip2() throws Exception {
-    doTest("digraph G {Hello->World}", "digraph ('digraph')\n" +
+    doTest("digraph G {Hello->World}", "KW_DIGRAPH ('digraph')\n" +
         "WHITE_SPACE (' ')\n" +
         "ID ('G')\n" +
         "WHITE_SPACE (' ')\n" +
